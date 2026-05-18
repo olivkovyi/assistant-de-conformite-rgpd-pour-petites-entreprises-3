@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistant de Conformité RGPD pour Petites Entreprises | Votre Partenaire Confiance pour le RGPD en France</title>
+    <meta name="description" content="Vérifiez la conformité de vos pratiques de traitement de données avec le RGPD et obtenez un rapport d">
+    <style>
+        :root {
+            --color-primary: #0A2244;
+            --color-secondary: #007bff;
+            --color-accent: #28a745;
+            --color-text: #333;
+            --color-background: #f4f7f6;
+            --color-card-bg: rgba(255, 255, 255, 0.9);
+            --color-border: rgba(10, 34, 68, 0.1);
+            --font-serif: "Georgia", serif;
+            --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-card: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+        body {
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-background);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        header {
+            background-color: var(--color-primary);
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+        }
+        header h1 {
+            font-family: var(--font-serif);
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        section {
+            padding: 50px 0;
+        }
+        .intro, .tool-section, .features, .seo-section {
+            background-color: var(--color-card-bg);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--color-border);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        .intro p {
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        h2 {
+            font-family: var(--font-serif);
+            font-size: 2.2em;
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+        .metric-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 6px;
+            border-left: 4px solid var(--color-secondary);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .metric-card h3 {
+            font-size: 1.4em;
+            color: var(--color-primary);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-family: var(--font-serif);
+        }
+        .metric-card p {
+            font-size: 1em;
+            color: #555;
+        }
+        .tool-section {
+            padding: 40px;
+        }
+        .tool-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--color-primary);
+        }
+        .tool-form input[type="text"],
+        .tool-form textarea,
+        .tool-form select {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            font-size: 1em;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        .tool-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .tool-form button {
+            background-color: var(--color-accent);
+            color: white;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            display: block;
+            width: auto;
+            margin: 0 auto;
+        }
+        .tool-form button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        #tool-result {
+            margin-top: 40px;
+            padding: 30px;
+            background-color: rgba(240, 248, 255, 0.7);
+            border: 1px solid var(--color-secondary);
+            border-radius: 8px;
+            min-height: 150px;
+            line-height: 1.8;
+            font-size: 1.1em;
+            color: var(--color-text);
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: none; /* Hidden by default */
+        }
+        #tool-result h3 {
+            font-family: var(--font-serif);
+            color: var(--color-primary);
+            font-size: 1.8em;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        #tool-result strong {
+            color: var(--color-secondary);
+        }
+        .next-steps {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .next-steps button {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 0 10px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+        .next-steps button:hover {
+            background-color: #081a33;
+            transform: translateY(-2px);
+        }
+        .seo-section {
+            padding: 40px;
+            font-size: 0.95em;
+            line-height: 1.7;
+            color: #555;
+        }
+        .seo-section h2 {
+            margin-bottom: 25px;
+            color: var(--color-primary);
+        }
+        .seo-section p {
+            margin-bottom: 15px;
+        }
+        .seo-section ul {
+            list-style-type: disc;
+            margin-left: 25px;
+            padding-left: 0;
+        }
+        .seo-section li {
+            margin-bottom: 8px;
+        }
+        footer {
+            background-color: var(--color-primary);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: auto;
+            font-size: 0.9em;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://assistant-de-conformite-rgpd-pour-petites-entreprises-3.onrender.com">
+    <meta property="og:title" content="Assistant de Conformité RGPD pour Petites Entreprises">
+    <meta property="og:description" content="Vérifiez la conformité de vos pratiques de traitement de données avec le RGPD et obtenez un rapport d">
+    <meta property="og:url" content="https://assistant-de-conformite-rgpd-pour-petites-entreprises-3.onrender.com">
+    <meta property="og:type" content="website">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Assistant de Conformité RGPD pour Petites Entreprises", "description": "Vérifiez la conformité de vos pratiques de traitement de données avec le RGPD et obtenez un rapport d", "url": "https://assistant-de-conformite-rgpd-pour-petites-entreprises-3.onrender.com", "applicationCategory": "UtilityApplication", "operatingSystem": "Web Browser"}</script>
+</head>
+<body data-site-slug="assistant-de-conformite-rgpd-pour-petites-entreprises-3" data-runtime-mode="analysis_tool">
+    <header>
+        <div class="container">
+            <h1>Assistant de Conformité RGPD pour Petites Entreprises</h1>
+            <p>Simplifiez le processus de mise en conformité RGPD. Évaluez vos pratiques de traitement de données et obtenez des recommandations claires.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Votre Partenaire Confiance pour le RGPD en France</h2>
+            <p>Naviguer dans les exigences du Règlement Général sur la Protection des Données (RGPD) peut être complexe, surtout pour les PME. Notre outil a été conçu spécifiquement pour les entreprises françaises, offrant une approche simple et pragmatique pour évaluer et améliorer votre conformité.</p>
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <h3>Audit Simplifié</h3>
+                    <p>Répondez à quelques questions clés sur vos opérations et nous évaluerons votre niveau actuel de conformité.</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Rapport Personnalisé</h3>
+                    <p>Recevez un rapport détaillé avec des actions concrètes pour renforcer la protection de vos données.</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Clarté & Efficacité</h3>
+                    <p>Des instructions faciles à comprendre, sans jargon juridique, pour une mise en œuvre rapide.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tool-section">
+            <h2>Évaluez Votre Conformité RGPD Maintenant</h2>
+            <form id="tool-form" class="tool-form">
+                <label for="entrepriseNom">Nom de votre entreprise :</label>
+                <input type="text" id="entrepriseNom" placeholder="Ex: Ma Petite Boulangerie SARL" required>
+
+                <label for="activite">Description de votre activité (brève) :</label>
+                <textarea id="activite" placeholder="Décrivez les services ou produits que vous proposez et le type de données que vous traitez (ex: coordonnées clients, historiques d'achat)." required></textarea>
+
+                <label for="donneesClients">Collectez-vous des données personnelles de clients (nom, email, téléphone, adresse) ?</label>
+                <select id="donneesClients" required>
+                    <option value="">Sélectionnez...</option>
+                    <option value="oui">Oui, de manière régulière</option>
+                    <option value="occasionnel">Oui, occasionnellement</option>
+                    <option value="non">Non</option>
+                </select>
+
+                <label for="donneesSensibles">Traitez-vous des données sensibles (santé, origine raciale, opinions politiques, etc.) ?</label>
+                <select id="donneesSensibles" required>
+                    <option value="">Sélectionnez...</option>
+                    <option value="oui">Oui</option>
+                    <option value="non">Non</option>
+                </select>
+
+                <label for="tiersDonnees">Partagez-vous des données personnelles avec des tiers (partenaires, prestataires) ?</label>
+                <select id="tiersDonnees" required>
+                    <option value="">Sélectionnez...</option>
+                    <option value="oui">Oui, régulièrement</option>
+                    <option value="occasionnel">Oui, occasionnellement</option>
+                    <option value="non">Non</option>
+                </select>
+
+                <label for="mesuresSecurite">Avez-vous mis en place des mesures de sécurité pour protéger les données (mot de passe robustes, chiffrement, sauvegarde) ?</label>
+                <select id="mesuresSecurite" required>
+                    <option value="">Sélectionnez...</option>
+                    <option value="oui">Oui, nous avons des procédures claires</option>
+                    <option value="partiel">Oui, mais c'est encore informel</option>
+                    <option value="non">Non, pas vraiment</option>
+                </select>
+
+                <button type="submit" id="tool-submit">Générer mon Rapport de Conformité</button>
+            </form>
+            <div id="tool-result">
+                <h3 id="result-headline">Votre Rapport de Conformité RGPD Préliminaire</h3>
+                <p><strong>Nom de l'entreprise :</strong> <span id="res-entrepriseNom"></span></p>
+                <p><strong>Évaluation :</strong></p>
+                <p id="res-evaluation"></p>
+                <p><strong>Recommandations clés :</strong></p>
+                <ul id="res-recommandations"></ul>
+                <div class="next-steps">
+                    <button data-affiliate-slot="download_report">Télécharger le Rapport Complet (PDF)</button>
+                    <button data-affiliate-slot="contact_expert">Contacter un Expert RGPD</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="seo-section">
+            <h2>RGPD PME France : Comprendre et Agir pour la Protection des Données</h2>
+            <p>Le Règlement Général sur la Protection des Données (RGPD) est entré en vigueur en mai 2018, et toutes les entreprises françaises, y compris les petites et moyennes entreprises (PME), sont concernées. La non-conformité peut entraîner des amendes significatives. Il est donc crucial pour les dirigeants de PME de comprendre leurs obligations et de mettre en place les mesures nécessaires pour protéger les données personnelles de leurs clients, employés et partenaires.</p>
+            <p>Notre assistant de conformité RGPD est un outil précieux pour les PME en France cherchant à évaluer rapidement leur situation et à obtenir des conseils pratiques. Que vous soyez un artisan, un commerçant, une TPE ou une PME de services, la gestion des données personnelles est une responsabilité incontournable. Notre plateforme simplifie cette démarche, en vous guidant à travers les points essentiels du RGPD et en vous offrant une feuille de route claire pour améliorer votre conformité.</p>
+            <p>Les questions fréquemment posées par les entreprises incluent :</p>
+            <ul>
+                <li>Comment savoir si mon entreprise est conforme au RGPD ?</li>
+                <li>Quelles sont les étapes clés pour la mise en conformité RGPD ?</li>
+                <li>Dois-je nommer un DPO (Délégué à la Protection des Données) ?</li>
+                <li>Comment gérer les consentements des utilisateurs pour la collecte de données ?</li>
+                <li>Quelles sont les sanctions en cas de non-conformité RGPD en France ?</li>
+            </ul>
+            <p>Notre outil vous aide à répondre à ces questions et à identifier les axes d'amélioration spécifiques à votre activité. Protéger les données, c'est aussi bâtir la confiance de vos clients et renforcer votre réputation sur le marché français.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Votre Assistant RGPD. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('tool-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const entrepriseNom = document.getElementById('entrepriseNom').value;
+            const activite = document.getElementById('activite').value;
+            const donneesClients = document.getElementById('donneesClients').value;
+            const donneesSensibles = document.getElementById('donneesSensibles').value;
+            const tiersDonnees = document.getElementById('tiersDonnees').value;
+            const mesuresSecurite = document.getElementById('mesuresSecurite').value;
+
+            let evaluation = "";
+            const recommandations = [];
+            let score = 0;
+
+            if (donneesClients === 'oui' || donneesClients === 'occasionnel') {
+                score += 1;
+            }
+            if (donneesSensibles === 'non') {
+                score += 1;
+            }
+            if (tiersDonnees === 'non') {
+                score += 1;
+            }
+            if (mesuresSecurite === 'oui') {
+                score += 2;
+            } else if (mesuresSecurite === 'partiel') {
+                score += 1;
+            }
+
+            if (score >= 4) {
+                evaluation = "Votre entreprise semble avoir une bonne base de conformité RGPD. C'est un excellent début !";
+            } else if (score >= 2) {
+                evaluation = "Votre entreprise a des points forts en matière de conformité, mais des améliorations sont nécessaires.";
+            } else {
+                evaluation = "Votre conformité RGPD nécessite une attention urgente. Des risques importants ont été identifiés.";
+            }
+
+            if (donneesClients === 'oui' || donneesClients === 'occasionnel') {
+                recommandations.push("Mettez en place un registre des activités de traitement pour cartographier toutes les données clients collectées.");
+                recommandations.push("Assurez-vous d'obtenir le consentement explicite de vos clients pour chaque finalité de traitement.");
+            }
+            if (donneesSensibles === 'oui') {
+                recommandations.push("Le traitement de données sensibles requiert des mesures de sécurité et des justifications légales très strictes. Consultez un expert.");
+            }
+            if (tiersDonnees === 'oui' || tiersDonnees === 'occasionnel') {
+                recommandations.push("Établissez des contrats de sous-traitance conformes au RGPD avec tous vos partenaires qui traitent des données pour vous.");
+            }
+            if (mesuresSecurite === 'non' || mesuresSecurite === 'partiel') {
+                recommandations.push("Renforcez vos mesures de sécurité techniques et organisationnelles (chiffrement, gestion des accès, politique de mots de passe, etc.).");
+            }
+            recommandations.push("Rédigez ou mettez à jour votre politique de confidentialité et rendez-la facilement accessible.");
+            recommandations.push("Formez vos équipes aux principes fondamentaux du RGPD et à la gestion des données personnelles.");
+            recommandations.push("Préparez-vous à gérer les demandes d'exercice de droits des personnes (accès, rectification, suppression, etc.).");
+
+
+            document.getElementById('res-entrepriseNom').textContent = entrepriseNom;
+            document.getElementById('res-evaluation').textContent = evaluation;
+            const ulRecommandations = document.getElementById('res-recommandations');
+            ulRecommandations.innerHTML = '';
+            recommandations.forEach(rec => {
+                const li = document.createElement('li');
+                li.textContent = rec;
+                ulRecommandations.appendChild(li);
+            });
+
+            document.getElementById('tool-result').style.display = 'block';
+            document.getElementById('tool-result').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+<div id="qa-smoke-result" hidden></div>
+<script id="farmbuilder-affiliate-helper">
+(function () {
+  window.__UTILITY_AFFILIATE_MAP = window.__UTILITY_AFFILIATE_MAP || {};
+  document.addEventListener("click", function (event) {
+    const target = event.target.closest("[data-affiliate-slot]");
+    if (!target) return;
+    const slot = target.getAttribute("data-affiliate-slot");
+    const href = window.__UTILITY_AFFILIATE_MAP[slot];
+    if (!href) return;
+    if (target.tagName && target.tagName.toLowerCase() === "a") {
+      target.setAttribute("href", href);
+      target.removeAttribute("rel");
+      return;
+    }
+    event.preventDefault();
+    window.open(href, "_blank");
+  }, true);
+})();
+</script>
+<script id="farmbuilder-functional-qa">
+(function () {
+  function marker() {
+    let node = document.getElementById("qa-smoke-result");
+    if (node) return node;
+    node = document.createElement("div");
+    node.id = "qa-smoke-result";
+    node.hidden = true;
+    document.body.appendChild(node);
+    return node;
+  }
+
+  let qaFinished = false;
+  let qaWatchdog = null;
+
+  function normalize(text) {
+    return String(text || "").replace(/\s+/g, " ").trim();
+  }
+
+  function findForm() {
+    return document.getElementById("tool-form") || document.querySelector("form");
+  }
+
+  function findResult() {
+    return (
+      document.getElementById("tool-result") ||
+      document.querySelector("[data-result]") ||
+      document.querySelector(".tool-result, .result-card, .result, .results, .output, .preview, .diagnostic, .analysis")
+    );
+  }
+
+  function primaryAction(form) {
+    if (!form) return null;
+    return (
+      document.getElementById("tool-submit") ||
+      form.querySelector("#tool-submit") ||
+      form.querySelector("[data-primary-action]") ||
+      form.querySelector("button[type=submit]") ||
+      form.querySelector("button") ||
+      form.querySelector("input[type=submit]")
+    );
+  }
+
+  function resultSignature(node) {
+    if (!node) return "";
+    const text = normalize(node.textContent);
+    const html = normalize(node.innerHTML).slice(0, 600);
+    return `${text}||${html}`;
+  }
+
+  function resultHeadline(node) {
+    if (!node) return "";
+    const heading = node.querySelector("h1, h2, h3, strong, b");
+    return normalize(heading ? heading.textContent : "");
+  }
+
+  function sampleText(field) {
+    const key = `${field.id || ""} ${field.name || ""} ${field.placeholder || ""}`.toLowerCase();
+    if (/email/.test(key)) return "bonjour@example.com";
+    if (/url|site|website|lien/.test(key)) return "https://example.com/offre-solaire";
+    if (/phone|tel|mobile/.test(key)) return "0612345678";
+    if (/ville|city|localisation|location|region|departement|postal/.test(key)) return "Paris";
+    if (/orientation/.test(key)) return "sud";
+    if (/keyword|theme|topic|sujet|subject/.test(key)) return "energie solaire domestique";
+    if (/titre|title/.test(key)) return "Simulateur solaire maison";
+    if (/nom|name|project/.test(key)) return "Projet Horizon";
+    if (/description|notes|content|message/.test(key)) return "Maison individuelle exposee sud avec toiture exploitable.";
+    return field.placeholder || "France";
+  }
+
+  function sampleNumber(field) {
+    const key = `${field.id || ""} ${field.name || ""}`.toLowerCase();
+    if (/inclinaison|angle|slope/.test(key)) return "30";
+    if (/surface|size|m2|sqm/.test(key)) return "28";
+    if (/annee|year/.test(key)) return "2024";
+    if (/prix|price|budget|cost|amount|montant/.test(key)) return "12000";
+    const min = Number(field.min || "");
+    const max = Number(field.max || "");
+    if (Number.isFinite(min) && Number.isFinite(max) && max >= min) {
+      return String(Math.min(max, Math.max(min, min + Math.round((max - min) * 0.35))));
+    }
+    if (Number.isFinite(min)) return String(Math.max(min, 12));
+    if (Number.isFinite(max)) return String(Math.min(max, 12));
+    return field.value || "12";
+  }
+
+  function applySample(field) {
+    const tag = (field.tagName || "").toLowerCase();
+    const type = (field.type || "").toLowerCase();
+    if (field.disabled) return;
+    if (type === "hidden" || type === "submit" || type === "button" || type === "reset" || type === "image" || type === "file") {
+      return;
+    }
+    const currentValue = normalize(field.value);
+    if (tag === "select") {
+      if (currentValue) return;
+      const option = Array.from(field.options || []).find((item) => item.value && !item.disabled) || field.options[0];
+      if (option) field.value = option.value;
+      return;
+    }
+    if (type === "checkbox") {
+      if (field.checked) return;
+      field.checked = true;
+      return;
+    }
+    if (type === "radio") {
+      if (field.checked) return;
+      field.checked = true;
+      return;
+    }
+    if (type === "date") {
+      if (currentValue) return;
+      field.value = "2026-03-01";
+      return;
+    }
+    if (type === "email") {
+      if (currentValue) return;
+      field.value = "bonjour@example.com";
+      return;
+    }
+    if (type === "url") {
+      if (currentValue) return;
+      field.value = "https://example.com/offre-solaire";
+      return;
+    }
+    if (type === "tel") {
+      if (currentValue) return;
+      field.value = "0612345678";
+      return;
+    }
+    if (type === "color") {
+      if (currentValue) return;
+      field.value = "#2f855a";
+      return;
+    }
+    if (type === "number" || type === "range") {
+      if (currentValue) return;
+      field.value = sampleNumber(field);
+      return;
+    }
+    if (currentValue) return;
+    field.value = sampleText(field);
+  }
+
+  function stamp(status, detail, headline, primary) {
+    if (qaFinished) return;
+    qaFinished = true;
+    if (qaWatchdog) {
+      window.clearTimeout(qaWatchdog);
+      qaWatchdog = null;
+    }
+    const node = marker();
+    node.dataset.status = status;
+    node.dataset.mode = "native-form";
+    node.dataset.detail = detail || "";
+    node.dataset.headline = headline || "";
+    node.dataset.primary = primary || "";
+    node.dataset.viewport = window.innerWidth <= 640 ? "mobile" : "desktop";
+    window.setTimeout(function () {
+      try {
+        window.stop();
+      } catch (_error) {}
+    }, 0);
+  }
+
+  function installModalGuards() {
+    const noop = function () {};
+    const approve = function () { return true; };
+    const empty = function () { return ""; };
+    try { window.alert = noop; } catch (_error) {}
+    try { window.confirm = approve; } catch (_error) {}
+    try { window.prompt = empty; } catch (_error) {}
+  }
+
+  function triggerAction(form, action) {
+    try {
+      if (typeof form.requestSubmit === "function") {
+        form.requestSubmit(action || undefined);
+        return;
+      }
+    } catch (_error) {}
+    if (action && typeof action.click === "function") {
+      action.click();
+      return;
+    }
+    form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+  }
+
+  function inspectResult(before, attemptsLeft) {
+    const result = findResult();
+    if (!result) {
+      stamp("fail", "La zone de resultat est introuvable.", "");
+      return;
+    }
+    const after = resultSignature(result);
+    const text = normalize(result.textContent);
+    if (after && after !== before && text.length >= 24) {
+      const primary = result.querySelector("a[href], button[data-href], [data-primary-url]") || document.querySelector("#tool-result a[href]");
+      stamp("pass", "Le formulaire natif a mis a jour la zone de resultat.", resultHeadline(result), primary ? (primary.getAttribute("href") || primary.getAttribute("data-primary-url") || "") : "");
+      return;
+    }
+    if (attemptsLeft > 0) {
+      window.setTimeout(function () {
+        inspectResult(before, attemptsLeft - 1);
+      }, 250);
+      return;
+    }
+    stamp("fail", "La zone de resultat n'a pas renvoye de contenu exploitable.", resultHeadline(result));
+  }
+
+  function runSmoke() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("__qa") !== "functional") return;
+    qaWatchdog = window.setTimeout(function () {
+      stamp("fail", "QA smoke timed out before the page reported a usable result.", "");
+    }, 7000);
+    const form = findForm();
+    if (!form) {
+      stamp("fail", "Le formulaire principal est introuvable.", "");
+      return;
+    }
+    const result = findResult();
+    const before = resultSignature(result);
+    installModalGuards();
+    try {
+      form.querySelectorAll("input, select, textarea").forEach(applySample);
+    } catch (error) {
+      stamp("fail", error && error.message ? `QA smoke sample failed: ${error.message}` : "QA smoke sample failed before submit.", "");
+      return;
+    }
+    const action = primaryAction(form);
+    try {
+      triggerAction(form, action);
+    } catch (error) {
+      stamp("fail", error && error.message ? `QA smoke submit failed: ${error.message}` : "QA smoke submit failed.", "");
+      return;
+    }
+    inspectResult(before, 10);
+  }
+
+  window.addEventListener("error", function (event) {
+    const message = event && event.message ? event.message : "JavaScript runtime error during QA smoke.";
+    stamp("fail", `QA smoke JS error: ${message}`, "");
+  }, { once: true });
+
+  window.addEventListener("unhandledrejection", function (event) {
+    const reason = event && event.reason;
+    const detail = typeof reason === "string"
+      ? reason
+      : reason && reason.message
+        ? reason.message
+        : "Unhandled promise rejection during QA smoke.";
+    stamp("fail", `QA smoke rejection: ${detail}`, "");
+  }, { once: true });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      window.setTimeout(runSmoke, 60);
+    }, { once: true });
+  } else {
+    window.setTimeout(runSmoke, 60);
+  }
+})();
+</script>
+</body>
+</html>
